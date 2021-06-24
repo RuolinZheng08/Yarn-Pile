@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
+
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Yarn.Unity;
 // 2018 bugs
 [CanEditMultipleObjects]
 #endif
-public class YarnImporterEditor : ScriptedImporterEditor
+public class YarnImporterEditor : UnityEditor.AssetImporters.ScriptedImporterEditor
 {
     private SerializedProperty baseLanguageIdProperty;
     private SerializedProperty baseLanguageProperty;

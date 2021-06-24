@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
+
 using System.IO;
 using System.Linq;
 using System.Globalization;
@@ -124,8 +124,8 @@ namespace Yarn.Unity
     /// <summary>
     /// A <see cref="ScriptedImporter"/> for Yarn assets. The actual asset used and referenced at runtime and in the editor will be a <see cref="YarnProgram"/>, which this class wraps around creating the asset's corresponding meta file.
     /// </summary>
-    [ScriptedImporter(2, new[] { "yarn", "yarnc" })]
-    public class YarnImporter : ScriptedImporter
+    [UnityEditor.AssetImporters.ScriptedImporter(2, new[] { "yarn", "yarnc" })]
+    public class YarnImporter : UnityEditor.AssetImporters.ScriptedImporter
     {
         // culture identifiers like en-US
         public string baseLanguageID;
@@ -189,7 +189,7 @@ namespace Yarn.Unity
             return false;
         }
 
-        public override void OnImportAsset(AssetImportContext ctx)
+        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             OnValidate();
             var extension = System.IO.Path.GetExtension(ctx.assetPath);
@@ -256,7 +256,7 @@ namespace Yarn.Unity
             }
         }
 
-        private void ImportYarn(AssetImportContext ctx)
+        private void ImportYarn(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             var sourceText = File.ReadAllText(ctx.assetPath);
             string fileName = System.IO.Path.GetFileNameWithoutExtension(ctx.assetPath);
@@ -340,7 +340,7 @@ namespace Yarn.Unity
             }
         }
 
-        private void ImportCompiledYarn(AssetImportContext ctx)
+        private void ImportCompiledYarn(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
 
             var bytes = File.ReadAllBytes(ctx.assetPath);
